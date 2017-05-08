@@ -3,6 +3,7 @@
  * Copyright © 2013-2017 Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 namespace Sledmore\Bootstrap\Framework\View\Element\Html\Link;
 
 /**
@@ -19,18 +20,18 @@ namespace Sledmore\Bootstrap\Framework\View\Element\Html\Link;
 class Current extends \Magento\Framework\View\Element\Template
 {
     /**
-     * Default path
+     * Default path.
      *
      * @var \Magento\Framework\App\DefaultPathInterface
      */
     protected $_defaultPath;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param \Magento\Framework\View\Element\Template\Context $context
-     * @param \Magento\Framework\App\DefaultPathInterface $defaultPath
-     * @param array $data
+     * @param \Magento\Framework\App\DefaultPathInterface      $defaultPath
+     * @param array                                            $data
      */
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
@@ -42,7 +43,7 @@ class Current extends \Magento\Framework\View\Element\Template
     }
 
     /**
-     * Get href URL
+     * Get href URL.
      *
      * @return string
      */
@@ -52,16 +53,16 @@ class Current extends \Magento\Framework\View\Element\Template
     }
 
     /**
-     * Get current mca
+     * Get current mca.
      *
      * @return string
      */
     private function getMca()
     {
         $routeParts = [
-            'module' => $this->_request->getModuleName(),
+            'module'     => $this->_request->getModuleName(),
             'controller' => $this->_request->getControllerName(),
-            'action' => $this->_request->getActionName(),
+            'action'     => $this->_request->getActionName(),
         ];
 
         $parts = [];
@@ -70,11 +71,12 @@ class Current extends \Magento\Framework\View\Element\Template
                 $parts[] = $value;
             }
         }
+
         return implode('/', $parts);
     }
 
     /**
-     * Check if link leads to URL equivalent to URL of currently displayed page
+     * Check if link leads to URL equivalent to URL of currently displayed page.
      *
      * @return bool
      */
@@ -84,7 +86,7 @@ class Current extends \Magento\Framework\View\Element\Template
     }
 
     /**
-     * Render block HTML
+     * Render block HTML.
      *
      * @return string
      */
@@ -100,30 +102,29 @@ class Current extends \Magento\Framework\View\Element\Template
             $highlight = ' active';
         }
 
-        $html = '<li class="nav item' . $highlight . '"><a href="' . $this->escapeHtml($this->getHref()) . '"';
+        $html = '<li class="nav item'.$highlight.'"><a href="'.$this->escapeHtml($this->getHref()).'"';
         $html .= $this->getTitle()
-            ? ' title="' . $this->escapeHtml((string)new \Magento\Framework\Phrase($this->getTitle())) . '"'
+            ? ' title="'.$this->escapeHtml((string) new \Magento\Framework\Phrase($this->getTitle())).'"'
             : '';
-        $html .= $this->getAttributesHtml() . '>';
+        $html .= $this->getAttributesHtml().'>';
 
         if ($this->getIsHighlighted()) {
             $html .= '<strong>';
         }
 
-        $html .= $this->escapeHtml((string)new \Magento\Framework\Phrase($this->getLabel()));
+        $html .= $this->escapeHtml((string) new \Magento\Framework\Phrase($this->getLabel()));
 
         if ($this->getIsHighlighted()) {
             $html .= '</strong>';
         }
 
         $html .= '</a></li>';
-        
 
         return $html;
     }
 
     /**
-     * Generate attributes' HTML code
+     * Generate attributes' HTML code.
      *
      * @return string
      */
@@ -133,7 +134,7 @@ class Current extends \Magento\Framework\View\Element\Template
         $attributes = $this->getAttributes();
         if ($attributes) {
             foreach ($attributes as $attribute => $value) {
-                $attributesHtml .= ' ' . $attribute . '="' . $this->escapeHtml($value) . '"';
+                $attributesHtml .= ' '.$attribute.'="'.$this->escapeHtml($value).'"';
             }
         }
 
